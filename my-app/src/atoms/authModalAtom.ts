@@ -3,7 +3,7 @@ import {atom} from 'recoil';
 // declare custom type 
 type AuthModalState = {
     isOpen: boolean;
-    type: 'login' | 'signup' | 'resetPassword'; 
+    type: 'login' | 'register' | 'resetPassword'; 
 }
 
 const intialAUthModalState: AuthModalState = {

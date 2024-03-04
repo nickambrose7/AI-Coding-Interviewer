@@ -9,10 +9,11 @@ type NavbarProps = {
 };
 
 const Navbar:React.FC<NavbarProps> = () => {
-    const setAuthModalState = useSetRecoilState(authModalState)
+    // useSetRecoilState is a hook that returns a setter function for a given atom
+    const setAuthModalState = useSetRecoilState(authModalState) 
     const handleClick = () => {
         setAuthModalState((prev) => ({
-            ...prev,
+            ...prev, // spread operator to copy the previous state, except for the isOpen property, we update it to true
             isOpen: true
         }))
     }
