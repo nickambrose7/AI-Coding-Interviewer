@@ -47,6 +47,7 @@ function useCloseModal() {
         setAuthModalState((prev) => ({
             ...prev,
             isOpen: false,
+            type: 'login'
         }));
     }
     useEffect(() => {
