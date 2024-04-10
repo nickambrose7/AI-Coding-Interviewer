@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
-import { toast } from 'react-toastify';
 
 type ResetPasswordProps = {
 
