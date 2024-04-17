@@ -5,6 +5,7 @@ import Split from 'react-split';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
+import Interviewer from '../Interviewer/Interviewer';
 
 type PlaygroundProps = {
     
@@ -26,8 +27,8 @@ const Playground:React.FC<PlaygroundProps> = () => {
                     style={{fontSize:16}}
                     />
                 </div>
-                <div className='text-white'>
-                    Chat box will be here!
+                <div className='w-full overflow-auto'>
+                    <Interviewer />
                 </div>
             </Split>
         </div> 

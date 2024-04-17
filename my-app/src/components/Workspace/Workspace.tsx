@@ -58,10 +58,17 @@ const Workspace: React.FC<WorkspaceProps> = () => {
                         </div>
                         <div className='font-semibold my-4'>
                             <p className='text-sm font-medium mt-4 text-white'>Output:</p>
-                                <div className='flex w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2 justify-between'>
-                                    [0, 1]
-                                    <FaCheckCircle size={25} color='lightgreen'/>
-                                </div>
+                            <div className='flex w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2 justify-between'>
+                                [0, 1]
+                                <FaCheckCircle size={25} color='lightgreen' />
+                            </div>
+                        </div>
+                        <div className="flex justify-end items-end">
+                            <button
+                                className='px-3 py-1.5 font-medium items-center transition-all focus:outline-none inline-flex text-sm text-white bg-dark-green-s hover:bg-green-3 rounded-lg'
+                            >
+                                Submit Textcase
+                            </button>
                         </div>
                     </div>
                 </Split>
