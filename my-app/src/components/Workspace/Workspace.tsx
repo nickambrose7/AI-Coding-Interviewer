@@ -3,6 +3,8 @@ import React from 'react';
 import Split from 'react-split';
 import ProblemDescription from './ProblemDescription/ProblemDescription';
 import Playground from './Playground/Playground';
+import EditorFooter from './Playground/EditorFooter';
+import { FaCheckCircle } from 'react-icons/fa';
 
 type WorkspaceProps = {
 
@@ -53,6 +55,13 @@ const Workspace: React.FC<WorkspaceProps> = () => {
                             <div className='w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2'>
                                 nums = [2, 7, 11, 15], target: 9
                             </div>
+                        </div>
+                        <div className='font-semibold my-4'>
+                            <p className='text-sm font-medium mt-4 text-white'>Output:</p>
+                                <div className='flex w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2 justify-between'>
+                                    [0, 1]
+                                    <FaCheckCircle size={25} color='lightgreen'/>
+                                </div>
                         </div>
                     </div>
                 </Split>
