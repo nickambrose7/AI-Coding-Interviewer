@@ -4,7 +4,7 @@ import Split from 'react-split';
 import ProblemDescription from './ProblemDescription/ProblemDescription';
 import Playground from './Playground/Playground';
 import EditorFooter from './Playground/EditorFooter';
-import { FaCheckCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaPlusCircle } from 'react-icons/fa';
 
 type WorkspaceProps = {
 
@@ -48,6 +48,9 @@ const Workspace: React.FC<WorkspaceProps> = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <button className='my-3'>
+                                    <FaPlusCircle size={25} color='lightblue'/>
+                                </button>
                             </div>
                         </div>
                         <div className='font-semibold my-4'>

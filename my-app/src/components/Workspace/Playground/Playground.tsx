@@ -18,7 +18,7 @@ const Playground:React.FC<PlaygroundProps> = () => {
     return (
         <div className='flex flex-col bg-dark-layer-1 relative'>
             <PreferenceNav />
-            <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={[60,60]}>
+            <Split className='h-[calc(100vh-94px)] w-full' direction='vertical' sizes={[60, 40]} minSize={[60,60]}>
                 <div className='w-full overflow-auto'>
                     <CodeMirror
                     value='const a = 1;'
