@@ -12,10 +12,19 @@ type WorkspaceProps = {
 const Workspace: React.FC<WorkspaceProps> = () => {
 
     return (
-    <Split className="split" minSize={0}>
-        <ProblemDescription />
-        <Playground />
-    </Split>
+        <div className='flex flex-col bg-dark-layer-1 relative'>
+            <Split className="split" direction='horizontal' minSize={0}>
+                <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={[60,60]}>
+                    <div className='w-full overflow-auto'>
+                        <ProblemDescription />
+                    </div>
+                    <div className='text-white'>
+                        testcases go here!
+                    </div>
+                </Split>
+                <Playground />
+            </Split>
+        </div>
     );
 }
 export default Workspace;
