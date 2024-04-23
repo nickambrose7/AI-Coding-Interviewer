@@ -4,7 +4,7 @@ import { BsChevronUp } from "react-icons/bs";
 type EditorFooterProps = {
 	
 };
-
+// not in use
 const EditorFooter: React.FC<EditorFooterProps> = () => {
 	return (
 		<div className='flex bg-dark-layer-1 absolute bottom-0 z-10 w-full'>

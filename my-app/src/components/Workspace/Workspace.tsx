@@ -53,7 +53,7 @@ const Workspace: React.FC<WorkspaceProps> = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className='font-semibold my-4'>
+                        <div className='font-semibold my-4 w-full'>
                             <p className='text-sm font-medium mt-4 text-white'>Input:</p>
                             <div className='w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2'>
                                 nums = [2, 7, 11, 15], target: 9
