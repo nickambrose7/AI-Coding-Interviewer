@@ -1,3 +1,7 @@
+## Project Notes
+
+For our data, we will use our Firebase DB for our dynamic data and a local database for our static data.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
