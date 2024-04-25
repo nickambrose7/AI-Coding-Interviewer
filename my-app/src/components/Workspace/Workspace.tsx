@@ -5,20 +5,22 @@ import ProblemDescription from './ProblemDescription/ProblemDescription';
 import Playground from './Playground/Playground';
 import EditorFooter from './Playground/EditorFooter';
 import { FaCheckCircle, FaPlusCircle } from 'react-icons/fa';
+import { Problem } from '@/utils/types/problem';
+
 
 type WorkspaceProps = {
-
+    problem: Problem;
 };
 
 
-const Workspace: React.FC<WorkspaceProps> = () => {
+const Workspace: React.FC<WorkspaceProps> = ({problem}) => {
 
     return (
         <div className='flex flex-col bg-dark-layer-1 relative'>
             <Split className="split" direction='horizontal' minSize={0}>
                 <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={[60, 60]}>
                     <div className='w-full overflow-auto'>
-                        <ProblemDescription />
+                        <ProblemDescription problem={problem}/>
                     </div>
                     <div className='w-full px-5 overflow-auto'>
                         <div className='w-full  overflow-auto'>
