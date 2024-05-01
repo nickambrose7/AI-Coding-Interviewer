@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMicCircle } from "react-icons/io5";
 
 
@@ -18,6 +18,22 @@ const Interviewer: React.FC<InterviewerProps> = () => {
         console.log(inputText);
         setInputText('Type here to ask for a hint or problem constraints....');
     };
+
+    useEffect(() => {
+        // try to fetch data from our api/chat/route.ts 
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:3000/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ messages: [{ role: 'system', content: 'Hello' }] }),
+            });
+            const data = await response.json();
+            console.log(data);
+        }
+        fetchData();
+    }, []);
 
     return (
         // heading
