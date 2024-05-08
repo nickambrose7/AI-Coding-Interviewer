@@ -24,7 +24,6 @@ const Interviewer: React.FC = () => {
         if (inputText.trim() === "") return; // Prevents submitting empty strings
         try {
             const data = await fetchData(inputText);
-            console.log("setting the interviewer response")
             setInterviewerResponse(data);
             if (!showInterviewerResponse) setShowInterviewerResponse(true);
         } catch (error) {
@@ -43,9 +42,8 @@ const Interviewer: React.FC = () => {
                 },
                 body: JSON.stringify({ messages: [{ role: 'system', content: userInput }] }),
             });
-            console.log(response);
             const data = await response.json();
-            console.log(data);
+            console.log('Data fetched:', data);
             return data;  // Ensure data is always an object
         } catch (error) {
             console.error('Error fetching data:', error);
