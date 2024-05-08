@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { IoMicCircle } from "react-icons/io5";
+import { FaRobot } from "react-icons/fa";
 
 const Interviewer: React.FC = () => {
     const [inputText, setInputText] = useState<string>("");
+    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
+    const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInputText(e.target.value);
@@ -53,13 +56,24 @@ const Interviewer: React.FC = () => {
                 <textarea
                     className='mr-10 font-normal my-4 w-full cursor-text rounded-lg border px-3 py-[10px]
                      bg-dark-fill-3 border-transparent text-white'
-                    style={{ minHeight: '10px', maxHeight: '100px' }}
+                    style={{ minHeight: '75px', maxHeight: '100px' }}
                     placeholder="Type here to ask for a hint or problem constraints...."
                     value={inputText}
                     onChange={handleInputChange}
                     onKeyUp={handleKeyUp}
                 />
             </div>
+            {showInterviewerResponse && (
+                <div className='flex w-full space-x-4'>
+                    <FaRobot size={57} color='orange' />
+                    <textarea
+                        className='mr-10 font-normal my-4 w-full  cursor-text rounded-lg border px-3 py-[10px]
+                     bg-dark-fill-3 border-transparent text-white'
+                        style={{ minHeight: '100px', maxHeight: '300px' }}
+                        value={interviewerResponse}
+                    />
+                </div>
+            )}
         </div>
     );
 };
