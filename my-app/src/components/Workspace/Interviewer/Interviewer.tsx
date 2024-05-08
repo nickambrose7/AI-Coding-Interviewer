@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { IoMicCircle } from "react-icons/io5";
 import { FaRobot } from "react-icons/fa";
@@ -7,7 +8,7 @@ const Interviewer: React.FC = () => {
     const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
         setInputText(e.target.value);
     };
 
@@ -18,12 +19,20 @@ const Interviewer: React.FC = () => {
         }
     };
 
+
     const handleSubmit = async () => {
         if (inputText.trim() === "") return; // Prevents submitting empty strings
-        console.log(inputText);
-        await fetchData(inputText);
+        try {
+            const data = await fetchData(inputText);
+            console.log("setting the interviewer response")
+            setInterviewerResponse(data);
+            if (!showInterviewerResponse) setShowInterviewerResponse(true);
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
         setInputText("");  // Clear the textarea
     };
+    
 
     const fetchData = async (userInput: string) => {
         try {
@@ -34,10 +43,13 @@ const Interviewer: React.FC = () => {
                 },
                 body: JSON.stringify({ messages: [{ role: 'system', content: userInput }] }),
             });
+            console.log(response);
             const data = await response.json();
-            console.log(data.messages[0].content);
+            console.log(data);
+            return data;  // Ensure data is always an object
         } catch (error) {
             console.error('Error fetching data:', error);
+            return { messages: [] };  // Return an empty messages array on error
         }
     };
 
