@@ -15,7 +15,7 @@ type WorkspaceProps = {
 const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     const [inputText, setInputText] = useState<string>(""); // users input text
     const [code, setCode] = useState<string>(problem.starterCode); // users code [javascript]
-    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
+    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(false);
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
@@ -59,7 +59,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                 ] }),
             });
             const data = await response.json();
-            console.log('Data fetched:', data);
+            // console.log('Data fetched:', data);
             return data;  // Ensure data is always an object
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -70,7 +70,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     return (
         <div className='flex flex-col bg-dark-layer-1 relative'>
             <Split className="split" direction='horizontal' minSize={0}>
-                <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={[60, 60]}>
+                <Split className='h-[calc(100vh-50px)]' direction='vertical' sizes={[60, 40]} minSize={[60, 60]}>
                     <div className='w-full overflow-auto'>
                         <ProblemDescription problem={problem} />
                     </div>

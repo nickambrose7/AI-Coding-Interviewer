@@ -43,7 +43,7 @@ const Interviewer: React.FC<InterviewerProps> = ({handleInputChange, handleKeyUp
                     <textarea
                         className='mr-10 font-normal my-4 w-full  cursor-text rounded-lg border px-3 py-[10px]
                      bg-dark-fill-3 border-transparent text-white'
-                        style={{ minHeight: '100px', maxHeight: '300px' }}
+                        style={{ minHeight: '150px', maxHeight: '300px' }}
                         value={interviewerResponse}
                     />
                 </div>

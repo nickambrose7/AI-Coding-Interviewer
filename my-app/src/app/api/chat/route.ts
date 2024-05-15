@@ -22,7 +22,7 @@ export async function POST(req: Request) {
   })
   // console.log(response.choices[0].message)
   pastMessages = [...pastMessages, response.choices[0].message]
-  console.log(pastMessages)
+  // console.log(pastMessages)
   return Response.json(response.choices[0].message.content)
 //   const stream = OpenAIStream(response)
  
