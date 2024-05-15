@@ -8,7 +8,7 @@ const openai = new OpenAI({
 export async function POST(req: Request) {
   const { messages } = await req.json()
   const response = await openai.chat.completions.create({
-    model: 'gpt-4',
+    model: 'gpt-4o',
     stream: false, // change to true for streaming
     messages,
   })
