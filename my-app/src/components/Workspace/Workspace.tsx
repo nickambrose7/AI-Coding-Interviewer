@@ -13,14 +13,18 @@ type WorkspaceProps = {
 
 
 const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
-
     const [inputText, setInputText] = useState<string>(""); // users input text
+    const [code, setCode] = useState<string>(problem.starterCode); // users code [javascript]
     const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
         setInputText(e.target.value);
     };
+
+    const handleCodeChange = (value: string) => {
+        setCode(value);
+    }
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -50,7 +54,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ messages: [{ role: 'system', content: userInput }] }),
+                body: JSON.stringify({ messages: [{ role: 'system', content: userInput + "this is the code: " + code}] }),
             });
             const data = await response.json();
             console.log('Data fetched:', data);
@@ -73,7 +77,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                     </div>
                 </Split>
                 <Playground problem={problem} handleInputChange={handleInputChange} handleKeyUp={handleKeyUp} handleSubmit={handleSubmit} 
-                inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse} />
+                inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse}
+                code={code} handleCodeChange={handleCodeChange} />
             </Split>
         </div>
     );

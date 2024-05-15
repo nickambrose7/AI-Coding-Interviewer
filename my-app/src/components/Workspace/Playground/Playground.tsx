@@ -16,21 +16,25 @@ type PlaygroundProps = {
     inputText: string;
     showInterviewerResponse: boolean;
     interviewerResponse: string;
+    code: string;
+    handleCodeChange: (code: string) => void;
 };
 
 
 
-const Playground:React.FC<PlaygroundProps> = ({problem, handleInputChange, handleKeyUp, handleSubmit, inputText, showInterviewerResponse, interviewerResponse}) => {    
+const Playground:React.FC<PlaygroundProps> = ({problem, handleInputChange, handleKeyUp, handleSubmit, inputText, showInterviewerResponse, 
+    interviewerResponse, code, handleCodeChange}) => {    
     return (
         <div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
             <PreferenceNav />
             <Split className='h-[calc(100vh-94px)] w-full' direction='vertical' sizes={[60, 40]} minSize={[60,60]}>
                 <div className='w-full overflow-auto'>
                     <CodeMirror
-                    value={problem.starterCode}
+                    value={code}
                     theme={vscodeDark}
                     extensions={[javascript()]}
                     style={{fontSize:16}}
+                    onChange={(value) => handleCodeChange(value)}
                     />
                 </div>
                 <div className='w-full overflow-auto'>
