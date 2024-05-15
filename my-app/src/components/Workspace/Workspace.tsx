@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Split from 'react-split';
 import ProblemDescription from './ProblemDescription/ProblemDescription';
 import Playground from './Playground/Playground';
@@ -14,6 +14,53 @@ type WorkspaceProps = {
 
 const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
 
+    const [inputText, setInputText] = useState<string>(""); // users input text
+    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
+    const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
+        setInputText(e.target.value);
+    };
+
+    const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();  // This prevents adding a new line on pressing Enter
+            handleSubmit();
+        }
+    };
+
+
+    const handleSubmit = async () => {
+        if (inputText.trim() === "") return; // Prevents submitting empty strings
+        try {
+            const data = await fetchData(inputText);
+            setInterviewerResponse(data);
+            if (!showInterviewerResponse) setShowInterviewerResponse(true);
+        } catch (error) {
+            console.error('Failed to fetch data:', error);
+        }
+        setInputText("");  // Clear the textarea
+    };
+    
+    // This function gets the data from the api route that calls GPT-4
+    const fetchData = async (userInput: string) => {
+        try {
+            const response = await fetch('http://localhost:3000/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ messages: [{ role: 'system', content: userInput }] }),
+            });
+            const data = await response.json();
+            console.log('Data fetched:', data);
+            return data;  // Ensure data is always an object
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return { messages: [] };  // Return an empty messages array on error
+        }
+    };
+
     return (
         <div className='flex flex-col bg-dark-layer-1 relative'>
             <Split className="split" direction='horizontal' minSize={0}>
@@ -25,7 +72,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                         <Testcases problem={problem} />
                     </div>
                 </Split>
-                <Playground problem={problem} />
+                <Playground problem={problem} handleInputChange={handleInputChange} handleKeyUp={handleKeyUp} handleSubmit={handleSubmit} 
+                inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse} />
             </Split>
         </div>
     );

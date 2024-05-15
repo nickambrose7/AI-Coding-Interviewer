@@ -10,11 +10,17 @@ import { Problem } from '@/utils/types/problem';
 
 type PlaygroundProps = {
     problem: Problem
+    handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    handleKeyUp: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    handleSubmit: () => void;
+    inputText: string;
+    showInterviewerResponse: boolean;
+    interviewerResponse: string;
 };
 
 
 
-const Playground:React.FC<PlaygroundProps> = ({problem}) => {    
+const Playground:React.FC<PlaygroundProps> = ({problem, handleInputChange, handleKeyUp, handleSubmit, inputText, showInterviewerResponse, interviewerResponse}) => {    
     return (
         <div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
             <PreferenceNav />
@@ -28,7 +34,9 @@ const Playground:React.FC<PlaygroundProps> = ({problem}) => {
                     />
                 </div>
                 <div className='w-full overflow-auto'>
-                    <Interviewer />
+                    <Interviewer handleInputChange={handleInputChange} handleKeyUp={handleKeyUp} handleSubmit={handleSubmit}
+                    inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse}
+                    />
                 </div>
             </Split>
         </div> 

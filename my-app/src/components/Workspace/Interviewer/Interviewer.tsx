@@ -3,53 +3,17 @@ import React, { useState } from 'react';
 import { IoMicCircle } from "react-icons/io5";
 import { FaRobot } from "react-icons/fa";
 
-const Interviewer: React.FC = () => {
-    const [inputText, setInputText] = useState<string>("");
-    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
-    const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
+type InterviewerProps = {
+    handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    handleKeyUp: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+    handleSubmit: () => void;
+    inputText: string;
+    showInterviewerResponse: boolean;
+    interviewerResponse: string;
+};
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
-        setInputText(e.target.value);
-    };
-
-    const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();  // This prevents adding a new line on pressing Enter
-            handleSubmit();
-        }
-    };
-
-
-    const handleSubmit = async () => {
-        if (inputText.trim() === "") return; // Prevents submitting empty strings
-        try {
-            const data = await fetchData(inputText);
-            setInterviewerResponse(data);
-            if (!showInterviewerResponse) setShowInterviewerResponse(true);
-        } catch (error) {
-            console.error('Failed to fetch data:', error);
-        }
-        setInputText("");  // Clear the textarea
-    };
+const Interviewer: React.FC<InterviewerProps> = ({handleInputChange, handleKeyUp, handleSubmit, inputText, showInterviewerResponse, interviewerResponse}) => {
     
-
-    const fetchData = async (userInput: string) => {
-        try {
-            const response = await fetch('http://localhost:3000/api/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ messages: [{ role: 'system', content: userInput }] }),
-            });
-            const data = await response.json();
-            console.log('Data fetched:', data);
-            return data;  // Ensure data is always an object
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            return { messages: [] };  // Return an empty messages array on error
-        }
-    };
 
     return (
         <div className='mx-4 flex flex-col bg-dark-layer-1 w-13/14 '>
