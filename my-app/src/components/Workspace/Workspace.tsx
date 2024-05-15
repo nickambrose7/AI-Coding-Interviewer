@@ -15,7 +15,7 @@ type WorkspaceProps = {
 const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     const [inputText, setInputText] = useState<string>(""); // users input text
     const [code, setCode] = useState<string>(problem.starterCode); // users code [javascript]
-    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(false);
+    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works

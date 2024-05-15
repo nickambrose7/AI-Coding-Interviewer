@@ -8,6 +8,15 @@ type TestcasesProps = {
 
 const Testcases: React.FC<TestcasesProps> = ({problem}) => {
     const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
+    const [showInterviewerTestCase, setShowInterviewerTestCase] = useState<boolean>(false);
+    // need some state to track if we want the AI generated test case to show
+
+    function addInterviewerTestCase() {
+        // add interviewer test case to the problem
+        // set the active test case to the interviewer test case
+        // set the showInterviewerTestCase to true
+    }
+
     return (
         <div className='w-full px-5 overflow-auto'>
             <div className='w-full  overflow-auto'>
@@ -30,6 +39,18 @@ const Testcases: React.FC<TestcasesProps> = ({problem}) => {
                                 </div>
                             </div>
                         </div>))}
+                    {/* add interviewer testcase */}
+                    <div className='mr-2 items-start mt-2 text-gray-500' key='add-testcase'
+                    onClick={addInterviewerTestCase} 
+                    title="This will have the interviewer generate a test case for you. Only use if completely stuck and 
+                    you can't come up with a testcase yourself!">
+                        <div className='flex flex-wrap items-center gap-y-4'>
+                            <div className={`font-medium items-center transition-all focus:outline-none inline-flex bg-dark-fill-3
+                        hover:bg-dark-fill-2 relative rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap text-orange-400`}>
+                                Interviewer Testcase
+                            </div>
+                        </div>
+                    </div>
 
                     <button className='my-3'>
                         <FaPlusCircle size={25} color='lightblue' />
