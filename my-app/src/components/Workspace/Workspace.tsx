@@ -54,7 +54,9 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ messages: [{ role: 'system', content: userInput + "this is the code: " + code}] }),
+                body: JSON.stringify({ messages: [{ role: 'user', content: userInput + "this is the code: " + code},
+                    
+                ] }),
             });
             const data = await response.json();
             console.log('Data fetched:', data);
