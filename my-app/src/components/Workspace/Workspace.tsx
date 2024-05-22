@@ -17,6 +17,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     const [code, setCode] = useState<string>(problem.starterCode); // users code [javascript]
     const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
+    const [testcaseInput, setTestcaseInput] = useState<string>(""); // users input text
+    const [testcaseOutput, setTestcaseOutput] = useState<string>(""); // users input text
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
         setInputText(e.target.value);
@@ -67,6 +69,27 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
         }
     };
 
+    // this function gets the testcase data from the api route that calls GPT-4
+    const fetchTestCaseData = async () => {
+        try {
+            console.log("code: ", code)
+            const response = await fetch('http://localhost:3000/api/testcase', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ messages: [{ role: 'user', content: code}, ] }),
+            });
+            const data = await response.json();
+            console.log('Data fetched:', data);
+            // setTestcaseInput(data.input);
+            // return data;  // Ensure data is always an object
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return { messages: [] };  // Return an empty messages array on error
+        }
+    };
+
     return (
         <div className='flex flex-col bg-dark-layer-1 relative'>
             <Split className="split" direction='horizontal' minSize={0}>
@@ -75,7 +98,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                         <ProblemDescription problem={problem} />
                     </div>
                     <div className='w-full overflow-auto'>
-                        <Testcases problem={problem} />
+                        <Testcases problem={problem} interviewerInputTestCase={testcaseInput} interviewerOutputTestCase={testcaseOutput}
+                        fetchTestCaseData={fetchTestCaseData}/>
                     </div>
                 </Split>
                 <Playground problem={problem} handleInputChange={handleInputChange} handleKeyUp={handleKeyUp} handleSubmit={handleSubmit} 
