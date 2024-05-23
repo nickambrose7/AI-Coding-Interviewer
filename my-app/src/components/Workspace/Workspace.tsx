@@ -72,13 +72,14 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     // this function gets the testcase data from the api route that calls GPT-4
     const fetchTestCaseData = async () => {
         try {
-            console.log("code: ", code)
+            console.log("Problem description:\n" + problem.problemStatement + "\ncode:\n" + code)
             const response = await fetch('http://localhost:3000/api/testcase', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ messages: [{ role: 'user', content: code}, ] }),
+                body: JSON.stringify({ messages: [{ role: 'user', content: 
+                "Problem description:\n" + problem.problemStatement + "\nCode:\n" + code}, ] }),
             });
             const data = await response.json();
             console.log('Data fetched:', data);
