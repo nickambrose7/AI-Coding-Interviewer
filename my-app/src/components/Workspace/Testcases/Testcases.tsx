@@ -66,15 +66,15 @@ const Testcases: React.FC<TestcasesProps> = ({ problem, interviewerInputTestCase
             <div className='font-semibold my-4 w-full'>
                 <p className='text-sm font-medium mt-4 text-white'>Input:</p>
                 <div className='w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2'>
-                    {showInterviewerTestCase === false ? (problem.examples[activeTestCaseId]?.inputText || interviewerInputTestCase) :
-                        "waiting for interviewer to generate test case..."}
+                    {showInterviewerTestCase === false ? problem.examples[activeTestCaseId]?.inputText :
+                         interviewerInputTestCase}
                 </div>
             </div>
             <div className='font-semibold my-4'>
                 <p className='text-sm font-medium mt-4 text-white'>Output:</p>
                 <div className='flex w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2 justify-between'>
-                    {showInterviewerTestCase === false ? (problem.examples[activeTestCaseId]?.outputText || interviewerOutputTestCase) :
-                        "waiting for interviewer to generate test case..."}
+                    {showInterviewerTestCase === false ? problem.examples[activeTestCaseId]?.outputText :
+                        interviewerOutputTestCase}
                     <FaCheckCircle size={25} color='lightgreen' />
                 </div>
             </div>

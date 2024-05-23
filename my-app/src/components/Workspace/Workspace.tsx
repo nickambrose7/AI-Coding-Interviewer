@@ -17,8 +17,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     const [code, setCode] = useState<string>(problem.starterCode); // users code [javascript]
     const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
-    const [testcaseInput, setTestcaseInput] = useState<string>(""); // users input text
-    const [testcaseOutput, setTestcaseOutput] = useState<string>(""); // users input text
+    const [testcaseInput, setTestcaseInput] = useState<string>("waiting...."); // users input text
+    const [testcaseOutput, setTestcaseOutput] = useState<string>("waiting...."); // users input text
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
         setInputText(e.target.value);
@@ -83,8 +83,9 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
             });
             const data = await response.json();
             console.log('Data fetched:', data);
-            // setTestcaseInput(data.input);
-            // return data;  // Ensure data is always an object
+            let strArr = data.split("Output:");
+            setTestcaseInput(strArr[0]);
+            setTestcaseOutput(strArr[1]);
         } catch (error) {
             console.error('Error fetching data:', error);
             return { messages: [] };  // Return an empty messages array on error
