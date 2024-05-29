@@ -6,22 +6,49 @@ import { FaRobot } from "react-icons/fa";
 type InterviewerProps = {
     handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     handleKeyUp: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-    handleSubmit: () => void;
     inputText: string;
     showInterviewerResponse: boolean;
     interviewerResponse: string;
+    showAsciiDiagram: boolean;
 };
 
-const Interviewer: React.FC<InterviewerProps> = ({handleInputChange, handleKeyUp, handleSubmit, inputText, showInterviewerResponse, interviewerResponse}) => {
-    
+const Interviewer: React.FC<InterviewerProps> = ({ handleInputChange, handleKeyUp, inputText, showInterviewerResponse, interviewerResponse, showAsciiDiagram }) => {
+
 
     return (
         <div className='mx-4 flex flex-col bg-dark-layer-1 w-13/14 '>
             <div className='flex h-10 items-center space-x-6'>
-                <div className='relative flex h-full flex-col justify-center cursor-pointer'>
-                    <div className='text-sm font-medium leading-5 text-white'>Ask your interviewer</div>
-                    <hr className='absolute bottom-0 h-0.5 w-full rounded-full border-none bg-white' />
-                </div>
+                {showAsciiDiagram ? (
+                    <>
+                        <div className='flex h-10 items-center space-x-6'>
+                            <div className='relative flex h-full flex-col justify-center cursor-pointer'>
+                                <div className='text-sm font-medium leading-5 text-gray-400'>Ask your interviewer</div>
+                            
+                            </div>
+                        </div>
+                        <div className='flex h-10 items-center space-x-6'>
+                            <div className='relative flex h-full flex-col justify-center cursor-pointer'>
+                                <div className='text-sm font-medium leading-5 text-white'>Draw a diagram</div>
+                                <hr className='absolute bottom-0 h-0.5 w-full rounded-full border-none bg-white' />
+                            </div>
+                        </div>
+                    </>
+                ) :
+                    (
+                        <>
+                            <div className='flex h-10 items-center space-x-6'>
+                                <div className='relative flex h-full flex-col justify-center cursor-pointer'>
+                                    <div className='text-sm font-medium leading-5 text-white'>Ask your interviewer</div>
+                                    <hr className='absolute bottom-0 h-0.5 w-full rounded-full border-none bg-white' />
+                                </div>
+                            </div>
+                            <div className='flex h-10 items-center space-x-6'>
+                                <div className='relative flex h-full flex-col justify-center cursor-pointer'>
+                                    <div className='text-sm font-medium leading-5 text-gray-400'>Draw a diagram</div>
+                                </div>
+                            </div>
+                        </>
+                    )}
             </div>
             <div className='flex w-full space-x-4 mt-2'>
                 <button>

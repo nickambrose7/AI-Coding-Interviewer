@@ -1,9 +1,26 @@
 import assert from "assert";
 import { Problem } from "../types/problem";
 
-const starterCodeTwoSum = `function twoSum(nums,target){
-  // Write your code here
-};`;
+// I'm going to change starter code for testing purposes!!
+
+const starterCodeTwoSum = `
+function twoSum(nums, target) {
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[i] + nums[j] == target) {
+                return [i, j];
+            }
+        }
+    }
+}
+
+
+`; // I'm going to change this to the code below later
+
+
+// const starterCodeTwoSum = `function twoSum(nums,target){
+//   // Write your code here
+// };`;
 
 // checks if the user has the correct code
 const handlerTwoSum = (fn: any) => {
@@ -43,8 +60,7 @@ export const twoSum: Problem = {
   <em>indices of the two numbers such that they add up to</em> <code>target</code>.
 </p>
 <p class='mt-3'>
-  You may assume that each input would have <strong>exactly one solution</strong>, and you
-  may not use thesame element twice.
+  You may not use the same element twice, and must return an empty array if there is no solution.
 </p>
 <p class='mt-3'>You can return the answer in any order.</p>`,
 	examples: [

@@ -15,10 +15,12 @@ type WorkspaceProps = {
 const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     const [inputText, setInputText] = useState<string>(""); // users input text
     const [code, setCode] = useState<string>(problem.starterCode); // users code [javascript]
-    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(true);
+    const [showInterviewerResponse, setShowInterviewerResponse] = useState<boolean>(false);
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
     const [testcaseInput, setTestcaseInput] = useState<string>("waiting...."); // users input text
     const [testcaseOutput, setTestcaseOutput] = useState<string>("waiting...."); // users input text
+    const [showAsciiDiagram, setShowAsciiDiagram] = useState<boolean>(false); // determines which tab is active
+    const [ascciDiagram, setAsciiDiagram] = useState<string>(""); // ascii diagram from gpt-4
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
         setInputText(e.target.value);
@@ -104,9 +106,9 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                         fetchTestCaseData={fetchTestCaseData}/>
                     </div>
                 </Split>
-                <Playground problem={problem} handleInputChange={handleInputChange} handleKeyUp={handleKeyUp} handleSubmit={handleSubmit} 
+                <Playground problem={problem} handleInputChange={handleInputChange} handleKeyUp={handleKeyUp}
                 inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse}
-                code={code} handleCodeChange={handleCodeChange} />
+                code={code} handleCodeChange={handleCodeChange} showAsciiDiagram={showAsciiDiagram} />
             </Split>
         </div>
     );
