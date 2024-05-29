@@ -18,12 +18,14 @@ type PlaygroundProps = {
     code: string;
     handleCodeChange: (code: string) => void;
     showAsciiDiagram: boolean;
+    swapInterviewerTabs: () => void;
+    ascciDiagram: string;
 };
 
 
 
 const Playground:React.FC<PlaygroundProps> = ({problem, handleInputChange, handleKeyUp, inputText, showInterviewerResponse, 
-    interviewerResponse, code, handleCodeChange, showAsciiDiagram}) => {    
+    interviewerResponse, code, handleCodeChange, showAsciiDiagram, swapInterviewerTabs, ascciDiagram}) => {    
     return (
         <div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
             <PreferenceNav />
@@ -40,7 +42,7 @@ const Playground:React.FC<PlaygroundProps> = ({problem, handleInputChange, handl
                 <div className='w-full overflow-auto'>
                     <Interviewer handleInputChange={handleInputChange} handleKeyUp={handleKeyUp}
                     inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse}
-                    showAsciiDiagram={showAsciiDiagram}
+                    showAsciiDiagram={showAsciiDiagram} swapInterviewerTabs={swapInterviewerTabs} ascciDiagram={ascciDiagram}
                     />
                 </div>
             </Split>

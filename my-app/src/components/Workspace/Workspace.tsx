@@ -19,8 +19,20 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
     const [interviewerResponse, setInterviewerResponse] = useState<string>("This is the interviewer's response.");
     const [testcaseInput, setTestcaseInput] = useState<string>("waiting...."); // users input text
     const [testcaseOutput, setTestcaseOutput] = useState<string>("waiting...."); // users input text
-    const [showAsciiDiagram, setShowAsciiDiagram] = useState<boolean>(false); // determines which tab is active
-    const [ascciDiagram, setAsciiDiagram] = useState<string>(""); // ascii diagram from gpt-4
+    const [showAsciiDiagram, setShowAsciiDiagram] = useState<boolean>(true); // determines which tab is active
+    const [ascciDiagram, setAsciiDiagram] = useState<string>(`
+        5
+      /   \\
+     3     8
+    / \\   / \\
+   1   4  6   9
+      `); // ascii diagram from gpt-4, need to take into account escape characters when the model returns, will take some tuning. 
+
+    const swapInterviewerTabs = () => {
+        setShowAsciiDiagram(!showAsciiDiagram);
+        // This function also needs to generate the ascii drawing if necessary. 
+    }
+
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => { // this works
         setInputText(e.target.value);
@@ -49,7 +61,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
         }
         setInputText("");  // Clear the textarea
     };
-    
+
     // This function gets the data from the api route that calls GPT-4
     const fetchData = async (userInput: string) => {
         try {
@@ -58,9 +70,11 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ messages: [{ role: 'user', content: userInput + "this is the code: " + code},
-                    
-                ] }),
+                body: JSON.stringify({
+                    messages: [{ role: 'user', content: userInput + "this is the code: " + code },
+
+                    ]
+                }),
             });
             const data = await response.json();
             // console.log('Data fetched:', data);
@@ -80,8 +94,12 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ messages: [{ role: 'user', content: 
-                "Problem description:\n" + problem.problemStatement + "\nCode:\n" + code}, ] }),
+                body: JSON.stringify({
+                    messages: [{
+                        role: 'user', content:
+                            "Problem description:\n" + problem.problemStatement + "\nCode:\n" + code
+                    },]
+                }),
             });
             const data = await response.json();
             console.log('Data fetched:', data);
@@ -103,12 +121,14 @@ const Workspace: React.FC<WorkspaceProps> = ({ problem }) => {
                     </div>
                     <div className='w-full overflow-auto'>
                         <Testcases problem={problem} interviewerInputTestCase={testcaseInput} interviewerOutputTestCase={testcaseOutput}
-                        fetchTestCaseData={fetchTestCaseData}/>
+                            fetchTestCaseData={fetchTestCaseData} />
                     </div>
                 </Split>
                 <Playground problem={problem} handleInputChange={handleInputChange} handleKeyUp={handleKeyUp}
-                inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse}
-                code={code} handleCodeChange={handleCodeChange} showAsciiDiagram={showAsciiDiagram} />
+                    inputText={inputText} showInterviewerResponse={showInterviewerResponse} interviewerResponse={interviewerResponse}
+                    code={code} handleCodeChange={handleCodeChange} showAsciiDiagram={showAsciiDiagram} swapInterviewerTabs={swapInterviewerTabs}
+                    ascciDiagram={ascciDiagram}
+                />
             </Split>
         </div>
     );
